@@ -17,7 +17,8 @@ public class TrackerDriver {
 				
 				
 				
-				
+				stmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
