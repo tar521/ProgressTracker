@@ -5,34 +5,41 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import com.cognixia.jump.progress.tracker.ConnectionManager;
 
 public class TrackerDriver {
 
 	private static Scanner sc;
+	private static User user;
 	
 	public static void main(String[] args) {
 			
 			try {
-				
 				System.out.println("\nEstablishing Connection...");
-				Connection conn = ConnectionManager.getConnection();
-				System.out.println("\nConnection Success!\n");
+				user = new User();
 				
+				if (user.getExit()) {
+					System.out.println("Exiting the application. Goodbye.");
+					user.exit();
+				}
+				
+				System.out.println("\nConnection Success!\n");
+
 				sc = new Scanner(System.in);
 				
-				userMenu(conn);
+				userMenu();
 				
 				sc.close();
-				conn.close();
+				user.exit();
+				
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println("Connection not established.");
+				System.out.println("Exiting...");
 			}
 			
 		
 	}
 	
-	public static void userMenu(Connection conn) {
+	public static void userMenu() {
 		System.out.println("Welcome to your TV Show Tracker!");
 		System.out.println("Please choose an option below:\n");
 		
