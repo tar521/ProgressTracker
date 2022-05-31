@@ -94,4 +94,7 @@ public class User {
 		conn.close();
 	}
 	
+	public Connection getConn() {
+		return conn;
+	}
 }
