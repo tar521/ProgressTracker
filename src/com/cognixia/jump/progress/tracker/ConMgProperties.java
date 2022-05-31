@@ -1,4 +1,4 @@
-package com.cognixia.jump.jdbc;
+package com.cognixia.jump.progress.tracker;
 
 import java.io.FileInputStream;
 import java.io.IOException;
