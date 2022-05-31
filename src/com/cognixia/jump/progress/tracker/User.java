@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class User {
 
@@ -22,7 +21,6 @@ public class User {
 	}
 	
 	private void login() throws SQLException {
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("USER LOGIN");
 		System.out.println("=========================\n");
@@ -32,7 +30,7 @@ public class User {
 			System.out.println("Please input username:");
 			
 			// getting username
-			username = sc.nextLine();
+			username = TrackerDriver.sc.nextLine();
 			if (username.equalsIgnoreCase("exit")) {
 				exit = true;
 				return;
@@ -40,7 +38,7 @@ public class User {
 			
 			// getting password
 			System.out.println("Please input password:");
-			String password = sc.nextLine();
+			String password = TrackerDriver.sc.nextLine();
 			if (password.equalsIgnoreCase("exit")) {
 				exit = true;
 				return;
@@ -71,7 +69,6 @@ public class User {
 						
 			rs.close();
 			pstmt.close();
-			sc.close();
 			break;
 		}
 		
