@@ -20,6 +20,7 @@ public class TrackerDriver {
 				if (user.getExit()) {
 					System.out.println("Exiting the application. Goodbye.");
 					user.exit();
+					return;
 				}
 				
 				System.out.println("\nConnection Success!\n");

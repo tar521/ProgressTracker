@@ -1,9 +1,9 @@
 package com.cognixia.jump.progress.tracker;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Scanner;
 
 public class User {
@@ -47,9 +47,14 @@ public class User {
 			}
 			
 			// Executing query to check for existing user
-			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			PreparedStatement pstmt = conn.prepareStatement("select * from users where username = ? and password = ?",
+					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			
-			ResultSet rs = stmt.executeQuery("select * from users where username ="+username+" and password ="+password);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			
+	
+			ResultSet rs = pstmt.executeQuery();
 			
 			// if empty - reenter information
 			if (!rs.next()) {
@@ -65,7 +70,7 @@ public class User {
 			id = rs.getInt("id");
 						
 			rs.close();
-			stmt.close();
+			pstmt.close();
 			break;
 		}
 		sc.close();
