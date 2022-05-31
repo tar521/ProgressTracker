@@ -71,9 +71,10 @@ public class User {
 						
 			rs.close();
 			pstmt.close();
+			sc.close();
 			break;
 		}
-		sc.close();
+		
 	}
 	
 	
