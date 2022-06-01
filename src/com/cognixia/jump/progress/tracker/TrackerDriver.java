@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.cognixia.jump.dao.TVShowDAO;
+import com.cognixia.jump.dao.TVShowDAOClass;
 import com.cognixia.jump.exceptions.ShowNotFoundException;
 import com.cognixia.jump.exceptions.ShowNotTrackedException;
 import com.cognixia.jump.dao.TVShow;
@@ -30,7 +31,7 @@ public class TrackerDriver {
 				return;
 			}
 
-			// TVShowDAO showDAO = new TVShowDAOClass(user);
+			showDAO = new TVShowDAOClass(user);
 			System.out.println("\nConnection Success!\n");
 
 			userMenu();

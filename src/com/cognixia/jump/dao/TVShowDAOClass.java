@@ -19,9 +19,10 @@ public class TVShowDAOClass implements TVShowDAO {
 	public TVShowDAOClass(User user) {
 		super();
 		this.user = user;
+		conn = user.getConn();
 	}
 
-	private Connection conn = user.getConn();
+	private Connection conn;
 	
 	
 	@Override
