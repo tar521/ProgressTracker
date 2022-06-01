@@ -109,7 +109,10 @@ public class TVShowDAOClass implements TVShowDAO {
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,show.getId());
 			
-			return pstmt.execute();	
+			int result = pstmt.executeUpdate();
+			if ( result > 0) {
+				return true;
+			}
 			
 		} catch (SQLException e) {
 			System.out.println("\"Failed to add Tv Show:" + show.getId() + " to your tracker");
@@ -125,8 +128,10 @@ public class TVShowDAOClass implements TVShowDAO {
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
-			pstmt.execute();
-			return true;	
+			int result = pstmt.executeUpdate();
+			if ( result > 0) {
+				return true;
+			}
 		} catch(SQLException e){ 
 			System.out.println("Failed to add Tv Show:" + TVshow.getId() + " to Not Complete TV Show List for User:" + user.getId());
 			
@@ -141,8 +146,10 @@ public class TVShowDAOClass implements TVShowDAO {
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
-			pstmt.execute();
-			return true;	
+			int result = pstmt.executeUpdate();
+			if ( result > 0) {
+				return true;
+			}
 		} catch(SQLException e){ 
 			System.out.println("Failed to add Tv Show:" + TVshow.getId() + " to In-Progress TV Show List for User:" + user.getId());
 			
@@ -157,8 +164,10 @@ public class TVShowDAOClass implements TVShowDAO {
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
-			pstmt.execute();
-			return true;	
+			int result = pstmt.executeUpdate();
+			if ( result > 0) {
+				return true;
+			}
 		} catch(SQLException e){ 
 			System.out.println("Failed to add Tv Show:" + TVshow.getId() + " to Complete TV Show List for User:" + user.getId());
 			
