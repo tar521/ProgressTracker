@@ -66,7 +66,10 @@ public class TrackerDriver {
 				case 1:
 					// VIEW USER TRACKER
 					viewTVShows();
+<<<<<<< HEAD
 					//System.out.println("UNIMPLEMENTED OPTION");
+=======
+>>>>>>> 338b36267980456fa16ab261fc3204de3479c2b5
 					break;
 				case 2:
 					// ADD SHOW TO TRACKER
@@ -78,7 +81,7 @@ public class TrackerDriver {
 					break;
 				case 4:
 					// REMOVE SHOW FROM TRACKER
-					System.out.println("UNIMPLEMENTED OPTION");
+					removeShowFromTracker();
 					break;
 				case 5:
 					// EXIT TRACKER APP
@@ -232,9 +235,9 @@ public class TrackerDriver {
 				System.out.println("Invalid input - please input an integer option");
 				sc.nextLine();
 			} catch (ShowNotFoundException e) {
-				System.out.println("Please try again.\n");
+				System.out.println(e.getMessage());
 			} catch (ShowNotTrackedException e) {
-				System.out.println("Error Occured :: Returning to main menu.");
+				System.out.println(e.getMessage());
 				return;
 			}
 
@@ -310,14 +313,15 @@ public class TrackerDriver {
 				System.out.println("Invalid input - please input an integer option");
 				sc.nextLine();
 			} catch (ShowNotFoundException e) {
-				System.out.println("Please try again.\n");
+				System.out.println(e.getMessage());
 			} catch (ShowNotTrackedException e) {
-				System.out.println("Error Occured :: Returning to main menu.");
+				System.out.println(e.getMessage());
 				return;
 			}
 
 			if (!repeatAction("update")) {
 				// LOGIC FOR REPEAT
+				return;
 			}
 		}
 	}
@@ -356,9 +360,9 @@ public class TrackerDriver {
 				System.out.println("Invalid input - please input an integer option");
 				sc.nextLine();
 			} catch (ShowNotFoundException e) {
-				System.out.println("Please try again.\n");
+				System.out.println(e.getMessage());
 			} catch (ShowNotTrackedException e) {
-				System.out.println("Error Occured :: Returning to main menu.");
+				System.out.println(e.getMessage());
 				return;
 			}
 
