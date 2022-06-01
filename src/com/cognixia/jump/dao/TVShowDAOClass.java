@@ -102,11 +102,30 @@ public class TVShowDAOClass implements TVShowDAO {
 	}
 
 	@Override
+	public boolean addShow(TVShow show) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user_shows(user_id, show_id, status)"
+					+ " VALUES (?, ?, 'NC'");
+			pstmt.setInt(1,user.getId());
+			pstmt.setInt(2,show.getId());
+			
+			return pstmt.execute();	
+			
+		} catch (SQLException e) {
+			System.out.println("\"Failed to add Tv Show:" + show.getId() + " to your tracker");
+		}
+		
+		return false;
+	}
+	
+	@Override
 	public boolean addNotCompleted(TVShow TVshow) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = NC WHERE User_ID = ? AND TVShow_id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
+			
+			pstmt.execute();
 			return true;	
 		} catch(SQLException e){ 
 			System.out.println("Failed to add Tv Show:" + TVshow.getId() + " to Not Complete TV Show List for User:" + user.getId());
@@ -121,6 +140,8 @@ public class TVShowDAOClass implements TVShowDAO {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = IP WHERE User_ID = ? AND TVShow_id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
+			
+			pstmt.execute();
 			return true;	
 		} catch(SQLException e){ 
 			System.out.println("Failed to add Tv Show:" + TVshow.getId() + " to In-Progress TV Show List for User:" + user.getId());
@@ -135,6 +156,8 @@ public class TVShowDAOClass implements TVShowDAO {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = C WHERE User_ID = ? AND TVShow_id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
+			
+			pstmt.execute();
 			return true;	
 		} catch(SQLException e){ 
 			System.out.println("Failed to add Tv Show:" + TVshow.getId() + " to Complete TV Show List for User:" + user.getId());
