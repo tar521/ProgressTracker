@@ -317,6 +317,7 @@ public class TrackerDriver {
 
 			if (!repeatAction("update")) {
 				// LOGIC FOR REPEAT
+				return;
 			}
 		}
 	}
