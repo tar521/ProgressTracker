@@ -54,8 +54,8 @@ public class TVShowDAOClass implements TVShowDAO {
 	public TVShow getTVShowById(int TVShowId) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE id = ?");
-			pstmt.setInt(1,user.getId());
-			pstmt.setInt(2,TVShowId);
+			
+			pstmt.setInt(1,TVShowId);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
