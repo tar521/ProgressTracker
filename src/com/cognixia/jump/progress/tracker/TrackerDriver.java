@@ -66,10 +66,7 @@ public class TrackerDriver {
 				case 1:
 					// VIEW USER TRACKER
 					viewTVShows();
-<<<<<<< HEAD
-					//System.out.println("UNIMPLEMENTED OPTION");
-=======
->>>>>>> 338b36267980456fa16ab261fc3204de3479c2b5
+
 					break;
 				case 2:
 					// ADD SHOW TO TRACKER
