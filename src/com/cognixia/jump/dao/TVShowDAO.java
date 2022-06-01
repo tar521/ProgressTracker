@@ -8,6 +8,9 @@ public interface TVShowDAO {
 	public TVShow getTVShowById(int TVShowId);
 	public TVShow getTVShowByName(String TVSTitle);
 	
+	public boolean  addShow (TVShow TVshow);
+	public boolean  removeShow (TVShow TVshow);
+	
 	public boolean addNotCompleted(TVShow TVshow);
 	public boolean addInProgress(TVShow TVshow);
 	public boolean addCompleted(TVShow TVshow);

@@ -5,13 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cognixia.jump.progress.tracker.User;
+import com.cognixia.jump.tracker.User;
 
 
 public class TVShowDAOClass implements TVShowDAO {
@@ -25,10 +23,11 @@ public class TVShowDAOClass implements TVShowDAO {
 
 	private Connection conn = user.getConn();
 	
+	
 	@Override
 	public List<TVShow> getAllTVShows() {
 		try{  
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE TVShow_id IN { SELECT TVShow_id FROM user_shows WHERE  User_ID = ?}");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE id IN ( SELECT show_id FROM user_shows WHERE user_id = ?)");
 			pstmt.setInt(1,user.getId());
 			
 			ResultSet rs = pstmt.executeQuery();
@@ -53,7 +52,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public TVShow getTVShowById(int TVShowId) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE TVShow_id = ?");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVShowId);
 			
@@ -79,7 +78,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public TVShow getTVShowByName(String TVSTitle) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE  Title = ?");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE title = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setString(2,TVSTitle);
 			
@@ -102,36 +101,56 @@ public class TVShowDAOClass implements TVShowDAO {
 	}
 
 	@Override
-	public boolean addShow(TVShow show) {
+	public boolean addShow(TVShow TVshow) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user_shows(user_id, show_id, status)"
-					+ " VALUES (?, ?, 'NC'");
+			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user_shows(user_id,show_id,status) VALUES (?, ?, NC)");
 			pstmt.setInt(1,user.getId());
-			pstmt.setInt(2,show.getId());
+			pstmt.setInt(2,TVshow.getId());
 			
-			int result = pstmt.executeUpdate();
-			if ( result > 0) {
-				return true;
-			}
+			 int result = pstmt.executeUpdate();
+			 if (result > 0)
+				 return true;
+			 
+		} catch(SQLException e){ 
+			System.out.println("Failed to insert Tv Show:" + TVshow.getId() + " to User TV Show List for User:" + user.getId());
 			
-		} catch (SQLException e) {
-			System.out.println("\"Failed to add Tv Show:" + show.getId() + " to your tracker");
 		}
-		
 		return false;
 	}
 	
 	@Override
-	public boolean addNotCompleted(TVShow TVshow) {
+	public boolean removeShow(TVShow TVshow) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = NC WHERE User_ID = ? AND TVShow_id = ?");
+			PreparedStatement pstmt = conn.prepareStatement("DELETE FROM user_shows WHERE user_id = ? AND show_id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
-			int result = pstmt.executeUpdate();
-			if ( result > 0) {
-				return true;
-			}
+			 int isExecute = pstmt.executeUpdate();
+			 if (isExecute > 0)
+				 return true;
+			 
+		} catch(SQLException e){ 
+			System.out.println("Failed to delete Tv Show:" + TVshow.getId() + " from User TV Show List for User:" + user.getId());
+			
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	@Override
+	public boolean addNotCompleted(TVShow TVshow) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET status = NC WHERE user_id = ? AND show_id = ?");
+			pstmt.setInt(1,user.getId());
+			pstmt.setInt(2,TVshow.getId());
+			
+			int isExecute = pstmt.executeUpdate();
+			 if (isExecute > 0)
+				 return true;
+			 
 		} catch(SQLException e){ 
 			System.out.println("Failed to add Tv Show:" + TVshow.getId() + " to Not Complete TV Show List for User:" + user.getId());
 			
@@ -142,14 +161,14 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public boolean addInProgress(TVShow TVshow){
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = IP WHERE User_ID = ? AND TVShow_id = ?");
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = IP WHERE user_id = ? AND show_id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
-			int result = pstmt.executeUpdate();
-			if ( result > 0) {
-				return true;
-			}
+			int isExecute = pstmt.executeUpdate();
+			 if (isExecute > 0)
+				 return true;
+			 
 		} catch(SQLException e){ 
 			System.out.println("Failed to add Tv Show:" + TVshow.getId() + " to In-Progress TV Show List for User:" + user.getId());
 			
@@ -160,14 +179,14 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public boolean addCompleted(TVShow TVshow){
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = C WHERE User_ID = ? AND TVShow_id = ?");
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = C WHERE user_id = ? AND show_id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
-			int result = pstmt.executeUpdate();
-			if ( result > 0) {
-				return true;
-			}
+			int isExecute = pstmt.executeUpdate();
+			 if (isExecute > 0)
+				 return true;
+			 
 		} catch(SQLException e){ 
 			System.out.println("Failed to add Tv Show:" + TVshow.getId() + " to Complete TV Show List for User:" + user.getId());
 			
@@ -178,7 +197,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public int ViewNotCompleted(TVShow TVshow) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE User_ID = ? AND Status = NC");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND status = NC");
 			pstmt.setInt(1,user.getId());
 			
 			
@@ -205,7 +224,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public int ViewInProgress(TVShow TVshow) {
 		try{ 
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE User_ID = ? AND Status = IP");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND status = IP");
 			pstmt.setInt(1,user.getId());
 			
 			
@@ -232,7 +251,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public int ViewCompleted(TVShow TVshow) {
 		try{ 
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE User_ID = ? AND Status = C");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND status = C");
 			pstmt.setInt(1,user.getId());
 			
 			
