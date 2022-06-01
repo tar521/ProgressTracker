@@ -66,19 +66,18 @@ public class TrackerDriver {
 				case 1:
 					// VIEW USER TRACKER
 					viewTVShows();
-					System.out.println("UNIMPLEMENTED OPTION");
 					break;
 				case 2:
 					// ADD SHOW TO TRACKER
-					System.out.println("UNIMPLEMENTED OPTION");
+					addShowToTracker();
 					break;
 				case 3:
 					// UPDATE SHOW ON TRACKER - STATUS
-					System.out.println("UNIMPLEMENTED OPTION");
+					updateShowStatus();
 					break;
 				case 4:
 					// REMOVE SHOW FROM TRACKER
-					System.out.println("UNIMPLEMENTED OPTION");
+					removeShowFromTracker();
 					break;
 				case 5:
 					// EXIT TRACKER APP
