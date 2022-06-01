@@ -28,13 +28,13 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public List<TVShow> getAllTVShows() {
 		try{  
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE id IN ( SELECT show_id FROM user_shows WHERE user_id = ?)");
-			pstmt.setInt(1,user.getId());
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows");
+			//pstmt.setInt(1,user.getId());
 			
 			ResultSet rs = pstmt.executeQuery();
 			List<TVShow> tvSList = new ArrayList<TVShow>();
 			while(rs.next()) {
-				int id = rs.getInt("TVShow_id");
+				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
 				int rating = rs.getInt("rating");
@@ -60,7 +60,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				int id = rs.getInt("TVShow_id");
+				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
 				int rating = rs.getInt("rating");
@@ -86,7 +86,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				int id = rs.getInt("TVShow_id");
+				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
 				int rating = rs.getInt("rating");
@@ -205,7 +205,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			ResultSet rs = pstmt.executeQuery();
 			int count = 0;
 			while(rs.next()) {
-				int id = rs.getInt("TVShow_id");
+				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
 				int rating = rs.getInt("rating");
@@ -232,7 +232,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			ResultSet rs = pstmt.executeQuery();
 			int count = 0;
 			while(rs.next()) {
-				int id = rs.getInt("TVShow_id");
+				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
 				int rating = rs.getInt("rating");
@@ -259,7 +259,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			ResultSet rs = pstmt.executeQuery();
 			int count = 0;
 			while(rs.next()) {
-				int id = rs.getInt("TVShow_id");
+				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
 				int rating = rs.getInt("rating");
