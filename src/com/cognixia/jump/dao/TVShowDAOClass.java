@@ -26,7 +26,31 @@ public class TVShowDAOClass implements TVShowDAO {
 	
 	
 	@Override
-	public List<TVShow> getAllTVShows() {
+	public void printAllTVShows() {
+		try{  
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows");
+			ResultSet rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				int id = rs.getInt("TVShow_id");
+				String title = rs.getString("title");
+				Time length = rs.getTime("length");
+				int rating = rs.getInt("rating");
+				TVShow tvS = new TVShow(id, title, length, rating);
+				tvS.toString();
+				
+			}
+			
+		} catch(SQLException e){ 
+			
+			System.out.println("Could not get the TV Shows List");
+		}
+		
+	}
+	
+	@Override
+	public List<TVShow> getAllUserShows(){
 		try{  
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE id IN ( SELECT show_id FROM user_shows WHERE user_id = ?)");
 			pstmt.setInt(1,user.getId());
@@ -49,6 +73,8 @@ public class TVShowDAOClass implements TVShowDAO {
 		}
 		return null;
 	}
+	
+	
 
 	@Override
 	public TVShow getTVShowById(int TVShowId) {

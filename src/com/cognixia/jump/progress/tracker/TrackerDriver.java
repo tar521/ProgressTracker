@@ -66,15 +66,15 @@ public class TrackerDriver {
 				case 1:
 					// VIEW USER TRACKER
 					viewTVShows();
-					System.out.println("UNIMPLEMENTED OPTION");
+					//System.out.println("UNIMPLEMENTED OPTION");
 					break;
 				case 2:
 					// ADD SHOW TO TRACKER
-					System.out.println("UNIMPLEMENTED OPTION");
+					addShowToTracker();
 					break;
 				case 3:
 					// UPDATE SHOW ON TRACKER - STATUS
-					System.out.println("UNIMPLEMENTED OPTION");
+					updateShowStatus();
 					break;
 				case 4:
 					// REMOVE SHOW FROM TRACKER
@@ -150,7 +150,7 @@ public class TrackerDriver {
 	}
 
 	public static void viewAllShows() {
-		List<TVShow> showList = showDAO.getAllTVShows();
+		List<TVShow> showList = showDAO.getAllUserShows();
 
 		if (showList.isEmpty()) {
 			System.out.println("There are no shows in the system.");
@@ -206,7 +206,7 @@ public class TrackerDriver {
 		while (true) {
 			System.out.println("\nChoose an id from the available TV Shows:\n");
 
-			viewAllShows();
+			showDAO.printAllTVShows();
 
 			try {
 
