@@ -232,9 +232,9 @@ public class TrackerDriver {
 				System.out.println("Invalid input - please input an integer option");
 				sc.nextLine();
 			} catch (ShowNotFoundException e) {
-				System.out.println("Please try again.\n");
+				System.out.println(e.getMessage());
 			} catch (ShowNotTrackedException e) {
-				System.out.println("Error Occured :: Returning to main menu.");
+				System.out.println(e.getMessage());
 				return;
 			}
 
@@ -310,9 +310,9 @@ public class TrackerDriver {
 				System.out.println("Invalid input - please input an integer option");
 				sc.nextLine();
 			} catch (ShowNotFoundException e) {
-				System.out.println("Please try again.\n");
+				System.out.println(e.getMessage());
 			} catch (ShowNotTrackedException e) {
-				System.out.println("Error Occured :: Returning to main menu.");
+				System.out.println(e.getMessage());
 				return;
 			}
 
@@ -356,9 +356,9 @@ public class TrackerDriver {
 				System.out.println("Invalid input - please input an integer option");
 				sc.nextLine();
 			} catch (ShowNotFoundException e) {
-				System.out.println("Please try again.\n");
+				System.out.println(e.getMessage());
 			} catch (ShowNotTrackedException e) {
-				System.out.println("Error Occured :: Returning to main menu.");
+				System.out.println(e.getMessage());
 				return;
 			}
 
