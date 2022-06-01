@@ -17,7 +17,7 @@ public interface TVShowDAO {
 	public boolean addInProgress(TVShow TVshow);
 	public boolean addCompleted(TVShow TVshow);
 	
-	public int ViewNotCompleted(TVShow TVshow);
-	public int ViewInProgress(TVShow TVshow);
-	public int ViewCompleted(TVShow TVshow);
+	public int ViewNotCompleted();
+	public int ViewInProgress();
+	public int ViewCompleted();
 }

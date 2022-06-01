@@ -163,7 +163,7 @@ public class TrackerDriver {
 	}
 
 	public static void viewCompletedShows() {
-		int count = showDAO.ViewCompleted(null);
+		int count = showDAO.ViewCompleted();
 
 		if (count == 0) {
 			System.out.println("No shows completed.");
@@ -175,7 +175,7 @@ public class TrackerDriver {
 	}
 
 	public static void viewInProgressShows() {
-		int count = showDAO.ViewInProgress(null);
+		int count = showDAO.ViewInProgress();
 
 		if (count == 0) {
 			System.out.println("No shows in progress.");
@@ -187,7 +187,7 @@ public class TrackerDriver {
 	}
 
 	public static void viewNotCompletedShows() {
-		int count = showDAO.ViewNotCompleted(null);
+		int count = showDAO.ViewNotCompleted();
 
 		if (count == 0) {
 			System.out.println("No shows in queue.");
@@ -254,11 +254,11 @@ public class TrackerDriver {
 			System.out.println("\nChoose an id from your shows to update:\n");
 
 			System.out.println("Not completed shows:");
-			showDAO.ViewNotCompleted(null);
+			showDAO.ViewNotCompleted();
 			System.out.println("In-Progress shows:");
-			showDAO.ViewInProgress(null);
+			showDAO.ViewInProgress();
 			System.out.println("Completed shows:");
-			showDAO.ViewCompleted(null);
+			showDAO.ViewCompleted();
 
 			try {
 

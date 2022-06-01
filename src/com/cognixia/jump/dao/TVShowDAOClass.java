@@ -222,7 +222,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	}
 
 	@Override
-	public int ViewNotCompleted(TVShow TVshow) {
+	public int ViewNotCompleted() {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND status = NC");
 			pstmt.setInt(1,user.getId());
@@ -249,7 +249,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	}
 
 	@Override
-	public int ViewInProgress(TVShow TVshow) {
+	public int ViewInProgress() {
 		try{ 
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND status = IP");
 			pstmt.setInt(1,user.getId());
@@ -276,7 +276,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	}
 
 	@Override
-	public int ViewCompleted(TVShow TVshow) {
+	public int ViewCompleted() {
 		try{ 
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND status = C");
 			pstmt.setInt(1,user.getId());
