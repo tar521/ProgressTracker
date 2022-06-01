@@ -324,8 +324,48 @@ public class TrackerDriver {
 
 	public static void removeShowFromTracker() {
 
-		if (!repeatAction("remove")) {
-			// LOGIC FOR REPEAT
+		System.out.println("REMOVE SHOW FROM TRACKER:");
+		System.out.println("======================\n");
+
+		while (true) {
+			System.out.println("\nChoose an id from the available TV Shows:\n");
+
+			viewAllShows();
+
+			try {
+
+				int option = sc.nextInt();
+				sc.nextLine();
+
+				TVShow temp = showDAO.getTVShowById(option);
+
+				if (temp == null) {
+					System.out.println("Show with id = " + option + " was not found.");
+					throw new ShowNotFoundException(option);
+				}
+
+				System.out.println("Removing \"" + temp.getTitle() + "\" to your tracker.");
+				if (!showDAO.removeShow(temp)) {
+					System.out.println("Show Not Removed");
+					throw new ShowNotTrackedException(option);
+				}
+
+				System.out.println("Show successfully removed!");
+
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input - please input an integer option");
+				sc.nextLine();
+			} catch (ShowNotFoundException e) {
+				System.out.println("Please try again.\n");
+			} catch (ShowNotTrackedException e) {
+				System.out.println("Error Occured :: Returning to main menu.");
+				return;
+			}
+
+			if (!repeatAction("remove")) {
+				System.out.println("Returning to main menu...");
+				return;
+			}
 		}
 	}
 
