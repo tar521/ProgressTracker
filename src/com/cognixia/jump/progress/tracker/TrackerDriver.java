@@ -163,15 +163,45 @@ public class TrackerDriver {
 	}
 	
 	public static void viewCompletedShows() {
-		showDAO.viewCompleted(null);
+		int count = showDAO.ViewCompleted(null);
+		
+		if (count == 0) {
+			System.out.println("No shows completed.");
+		}
+		else if (count == 1) {
+			System.out.println(count + " show in progress.");
+		}
+		else {
+			System.out.println(count + " show(s) have been completed.");
+		}
 	}
 	
 	public static void viewInProgressShows() {
-		showDAO.viewInProgress(null);
+		int count = showDAO.ViewInProgress(null);
+		
+		if (count == 0) {
+			System.out.println("No shows in progress.");
+		}
+		else if (count == 1){
+			System.out.println(count + " show in progress");
+		}
+		else {
+			System.out.println(count + " shows in progress.");
+		}
 	}
 	
 	public static void viewNotCompletedShows() {
-		showDAO.viewNotCompleted(null);
+		int count = showDAO.ViewNotCompleted(null);
+		
+		if (count == 0) {
+			System.out.println("No shows in queue.");
+		}
+		else if (count == 1) {
+			System.out.println(count + " show in queue.");
+		}
+		else {
+			System.out.println(count + " shows in queue");
+		}
 	}
 	
 	public static void addShowToTracker() {
