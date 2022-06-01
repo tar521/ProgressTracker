@@ -12,7 +12,7 @@ public interface TVShowDAO {
 	public boolean addInProgress(TVShow TVshow);
 	public boolean addCompleted(TVShow TVshow);
 	
-	public boolean ViewNotCompleted(TVShow TVshow);
-	public boolean ViewInProgress(TVShow TVshow);
-	public boolean ViewCompleted(TVShow TVshow);
+	public int ViewNotCompleted(TVShow TVshow);
+	public int ViewInProgress(TVShow TVshow);
+	public int ViewCompleted(TVShow TVshow);
 }

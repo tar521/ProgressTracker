@@ -1,17 +1,27 @@
 package com.cognixia.jump.dao;
 
-import java.time.LocalTime;
+import java.sql.Time;
 
 public class TVShow {
 
-	public String id;
+	public int id;
 	public String title;
-	public LocalTime length;
+	public Time length;
 	public int rating;
-	public String getId() {
+	
+	
+	public TVShow(int id, String title, Time length, int rating) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.length = length;
+		this.rating = rating;
+	}
+	
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -20,10 +30,10 @@ public class TVShow {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public LocalTime getLength() {
+	public Time getLength() {
 		return length;
 	}
-	public void setLength(LocalTime length) {
+	public void setLength(Time length) {
 		this.length = length;
 	}
 	public int getRating() {
