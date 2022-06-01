@@ -9,7 +9,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cognixia.jump.tracker.User;
+import com.cognixia.jump.progress.tracker.User;
 
 
 public class TVShowDAOClass implements TVShowDAO {
