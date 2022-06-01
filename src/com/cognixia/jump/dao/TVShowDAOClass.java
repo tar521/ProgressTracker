@@ -17,8 +17,15 @@ import com.cognixia.jump.tracker.User;
 
 public class TVShowDAOClass implements TVShowDAO {
 	private User user;
-	private Connection conn = user.getConn();
+	
+	
+	public TVShowDAOClass(User user) {
+		super();
+		this.user = user;
+	}
 
+	private Connection conn = user.getConn();
+	
 	@Override
 	public List<TVShow> getAllTVShows() {
 		try{  
