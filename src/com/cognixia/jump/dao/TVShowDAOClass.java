@@ -36,7 +36,7 @@ public class TVShowDAOClass implements TVShowDAO {
 				int id = rs.getInt("TVShow_id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
-				int rating = rs.getInt("rating");
+				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				tvS.toString();
 				
@@ -61,7 +61,7 @@ public class TVShowDAOClass implements TVShowDAO {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
-				int rating = rs.getInt("rating");
+				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				tvSList.add(tvS);
 			}
@@ -89,7 +89,7 @@ public class TVShowDAOClass implements TVShowDAO {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
-				int rating = rs.getInt("rating");
+				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				return tvS;
 			}
@@ -115,7 +115,7 @@ public class TVShowDAOClass implements TVShowDAO {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
-				int rating = rs.getInt("rating");
+				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				return tvS;
 			}
@@ -234,7 +234,7 @@ public class TVShowDAOClass implements TVShowDAO {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
-				int rating = rs.getInt("rating");
+				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				System.out.println(tvS.toString());
 				count++;
@@ -261,7 +261,7 @@ public class TVShowDAOClass implements TVShowDAO {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
-				int rating = rs.getInt("rating");
+				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				System.out.println(tvS.toString());
 				count++;
@@ -288,7 +288,7 @@ public class TVShowDAOClass implements TVShowDAO {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
 				Time length = rs.getTime("length");
-				int rating = rs.getInt("rating");
+				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				System.out.println(tvS.toString());
 				count++;

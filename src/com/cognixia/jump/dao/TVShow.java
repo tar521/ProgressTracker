@@ -7,10 +7,10 @@ public class TVShow {
 	public int id;
 	public String title;
 	public Time length;
-	public int rating;
+	public float rating;
 	
 	
-	public TVShow(int id, String title, Time length, int rating) {
+	public TVShow(int id, String title, Time length, float rating) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -36,10 +36,10 @@ public class TVShow {
 	public void setLength(Time length) {
 		this.length = length;
 	}
-	public int getRating() {
+	public float getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(float rating) {
 		this.rating = rating;
 	}
 	@Override
