@@ -42,7 +42,7 @@ public class TVShowDAOClass implements TVShowDAO {
 				
 			}
 			
-		} catch(SQLException e){ 
+		} catch(SQLException e){
 			
 			System.out.println("Could not get the TV Shows List");
 		}
@@ -52,8 +52,9 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public List<TVShow> getAllUserShows(){
 		try{  
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows");
-			//pstmt.setInt(1,user.getId());
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows JOIN shows s ON (show_id = s.id) "
+					+ "WHERE user_id = ?");
+			pstmt.setInt(1,user.getId());
 			
 			ResultSet rs = pstmt.executeQuery();
 			List<TVShow> tvSList = new ArrayList<TVShow>();

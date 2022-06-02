@@ -104,7 +104,7 @@ public class TrackerDriver {
 		System.out.println("=======================================");
 		while (true) {
 			System.out.println("\nChoose a view option of the TV Shows:\n");
-			System.out.println(" 1) View all available TV Shows");
+			System.out.println(" 1) View all you tracked TV Shows");
 			System.out.println(" 2) View your shows that are not completed");
 			System.out.println(" 3) View your shows that are in-progress");
 			System.out.println(" 4) View your shows that you've completed");
@@ -154,7 +154,7 @@ public class TrackerDriver {
 		List<TVShow> showList = showDAO.getAllUserShows();
 
 		if (showList.isEmpty()) {
-			System.out.println("There are no shows in the system.");
+			System.out.println("There are no shows in your tracker.");
 			return;
 		}
 		for (TVShow show : showList) {
