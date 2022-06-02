@@ -44,7 +44,7 @@ public class TVShow {
 	}
 	@Override
 	public String toString() {
-		return "TVShow [id=" + id + ", title=" + title + ", length=" + length + ", rating=" + rating + "]";
+		return "Title: " + title + ", ID: " + id + ", Length: " + length + ", Rating: " + rating;
 	}
 	
 	

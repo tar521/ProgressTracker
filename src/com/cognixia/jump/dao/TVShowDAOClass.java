@@ -38,7 +38,7 @@ public class TVShowDAOClass implements TVShowDAO {
 				String length = rs.getString("length");
 				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
-				tvS.toString();
+				System.out.println(tvS.toString());
 				
 			}
 			
