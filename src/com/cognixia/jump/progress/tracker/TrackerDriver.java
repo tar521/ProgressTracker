@@ -1,5 +1,9 @@
 package com.cognixia.jump.progress.tracker;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -108,7 +112,8 @@ public class TrackerDriver {
 			System.out.println(" 2) View your shows that are not completed");
 			System.out.println(" 3) View your shows that are in-progress");
 			System.out.println(" 4) View your shows that you've completed");
-			System.out.println(" 5) Exit to Main Menu\n");
+			System.out.println(" 5) View Percentage Completed");
+			System.out.println(" 6) Exit to Main Menu\n");
 
 			try {
 
@@ -129,6 +134,8 @@ public class TrackerDriver {
 					viewCompletedShows();
 					break;
 				case 5:
+					viewPercentage();
+				case 6:
 					// EXIT TO MAIN MENU
 					System.out.println("Returning to Main Menu...\n");
 					break;
@@ -136,7 +143,7 @@ public class TrackerDriver {
 					System.out.println("Invalid Input - Please enter a listed option");
 				}
 
-				if (option == 5) {
+				if (option == 6) {
 					break;
 				}
 			} catch (InputMismatchException e) {
@@ -414,6 +421,32 @@ public class TrackerDriver {
 				System.out.println("\nPlease enter 1 or 2");
 			}
 		}
+	}
+	
+	public static void viewPercentage() {
+		List<TVShow> tempList = showDAO.getAllUserShows();
+		int trackedShows = tempList.size();
+		
+		PrintStream originalOut = System.out;
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+        
+		int completedShows = showDAO.ViewCompleted();
+		
+		System.setOut(originalOut);
+		
+		try {
+			os.close();
+			ps.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		double percentCompleted = ((double) completedShows / trackedShows) * 100;
+		long result = Math.round(percentCompleted);
+		System.out.println("You are " + result + "% of the way through your list! Keep it up!");
 	}
 
 }
