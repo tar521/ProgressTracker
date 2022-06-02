@@ -265,7 +265,15 @@ public class TrackerDriver {
 				int id = sc.nextInt();
 				sc.nextLine();
 
-				TVShow temp = showDAO.getTVShowById(id);
+				List<TVShow> tempList = showDAO.getAllUserShows();
+				TVShow temp = null;
+				
+				for ( TVShow t : tempList) {
+					if (t.getId() == id) {
+						temp = t;
+						break;
+					}
+				}
 
 				if (temp == null) {
 					System.out.println("Show with id = " + id + " was not found.");
