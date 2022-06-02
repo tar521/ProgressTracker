@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import com.cognixia.jump.dao.TVShowDAO;
 import com.cognixia.jump.dao.TVShowDAOClass;
+import com.cognixia.jump.exceptions.ShowAlreadyTrackedException;
 import com.cognixia.jump.exceptions.ShowNotFoundException;
 import com.cognixia.jump.exceptions.ShowNotTrackedException;
 import com.cognixia.jump.dao.TVShow;
@@ -223,7 +224,7 @@ public class TrackerDriver {
 				System.out.println("Adding \"" + temp.getTitle() + "\" to your tracker.");
 				if (!showDAO.addShow(temp)) {
 					System.out.println("Show Not Added");
-					throw new ShowNotTrackedException(option);
+					throw new ShowAlreadyTrackedException(option);
 				}
 
 				System.out.println("Show successfully added!");
@@ -233,7 +234,7 @@ public class TrackerDriver {
 				sc.nextLine();
 			} catch (ShowNotFoundException e) {
 				System.out.println(e.getMessage());
-			} catch (ShowNotTrackedException e) {
+			} catch (ShowAlreadyTrackedException e) {
 				System.out.println(e.getMessage());
 				return;
 			}

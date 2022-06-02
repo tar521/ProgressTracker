@@ -130,14 +130,30 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public boolean addShow(TVShow TVshow) {
 		try {
-
+			int count = 0;
+			PreparedStatement prestmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND show_id = ?");
+			prestmt.setInt(1, user.getId());
+			prestmt.setInt(2,  TVshow.getId());
+			
+			ResultSet rs = prestmt.executeQuery();
+			
+			while (rs.next()) {
+				count++;
+			}
+			
+			if (count > 0) {
+				return false;
+			}
+			
+			
 			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user_shows(user_id,show_id,status) VALUES (?, ?, 'NC')");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
-			 int result = pstmt.executeUpdate();
-			 if (result > 0)
-				 return true;
+			int result = pstmt.executeUpdate();
+			if (result > 0)
+				return true;
+			
 			 
 		} catch(SQLException e){ 
 			System.out.println("Failed to insert Tv Show:" + TVshow.getId() + " to User TV Show List for User:" + user.getId());
