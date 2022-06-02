@@ -55,6 +55,3 @@ TRUNCATE TABLE user_shows;
 SELECT * FROM shows;
 SELECT * FROM users;
 SELECT * FROM user_shows;
-SELECT * FROM user_shows
-JOIN shows s ON (show_id = s.id)
-WHERE status = 'IP';
