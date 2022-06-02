@@ -1,5 +1,9 @@
 package com.cognixia.jump.progress.tracker;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -422,9 +426,27 @@ public class TrackerDriver {
 	public static void viewPercentage() {
 		List<TVShow> tempList = showDAO.getAllUserShows();
 		int trackedShows = tempList.size();
+		
+		PrintStream originalOut = System.out;
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+        
 		int completedShows = showDAO.ViewCompleted();
+		
+		System.setOut(originalOut);
+		
+		try {
+			os.close();
+			ps.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		double percentCompleted = ((double) completedShows / trackedShows) * 100;
-		System.out.println("You are " + percentCompleted + "% of the way through your list! Keep it up!");
+		long result = Math.round(percentCompleted);
+		System.out.println("You are " + result + "% of the way through your list! Keep it up!");
 	}
 
 }
