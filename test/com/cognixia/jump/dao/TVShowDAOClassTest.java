@@ -89,16 +89,16 @@ class TVShowDAOClassTest {
 	
 	@Test
 	void testPrintAllTVShows() {
-		String expectedOutput = "Title: Planet Earth II, ID: 1, Length: 04:58:00, Rating: 9.4"
-				+ "Title: Breaking Bad, ID: 2, Length: 00:49:00, Rating: 9.4"
-				+ "Title: Planet Earth, ID: 3, Length: 08:58:00, Rating: 9.4"
-				+ "Title: Band of Brothers, ID: 4, Length: 09:54:00, Rating: 9.4"
-				+ "Title: Chernobyl, ID: 5, Length: 05:30:00, Rating: 9.3"
-				+ "Title: The Wire, ID: 6, Length: 60:00:00, Rating: 9.3"
-				+ "Title: Blue Planet II, ID: 7, Length: 06:04:00, Rating: 9.2"
-				+ "Title: Avatar: The Last Airbender, ID: 8, Length: 24:14:00, Rating: 9.2"
-				+ "Title: Cosmos: A Spacetime Odyssey, ID: 9, Length: 09:17:00, Rating: 9.2"
-				+ "Title: The Sopranos, ID: 10, Length: 86:00:00, Rating: 9.2";
+		String expectedOutput = "ID: 1, Title: Planet Earth II, Length: 04:58:00, Rating: 9.4"
+				+ "ID: 2, Title: Breaking Bad, Length: 00:49:00, Rating: 9.4"
+				+ "ID: 3, Title: Planet Earth, Length: 08:58:00, Rating: 9.4"
+				+ "ID: 4, Title: Band of Brothers, Length: 09:54:00, Rating: 9.4"
+				+ "ID: 5, Title: Chernobyl, Length: 05:30:00, Rating: 9.3"
+				+ "ID: 6, Title: The Wire, Length: 60:00:00, Rating: 9.3"
+				+ "ID: 7, Title: Blue Planet II, Length: 06:04:00, Rating: 9.2"
+				+ "ID: 8, Title: Avatar: The Last Airbender, Length: 24:14:00, Rating: 9.2"
+				+ "ID: 9, Title: Cosmos: A Spacetime Odyssey, Length: 09:17:00, Rating: 9.2"
+				+ "ID: 10, Title: The Sopranos, Length: 86:00:00, Rating: 9.2";
 		
 		PrintStream originalOut = System.out;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -118,9 +118,9 @@ class TVShowDAOClassTest {
 
 	@Test
 	void testGetAllUserShows() {
-		String expectedOutput = "Title: Breaking Bad, ID: 2, Length: 00:49:00, Rating: 9.4"
-					+ "Title: Planet Earth II, ID: 1, Length: 04:58:00, Rating: 9.4"
-					+ "Title: Band of Brothers, ID: 4, Length: 09:54:00, Rating: 9.4";
+		String expectedOutput = "ID: 2, Title: Breaking Bad, Length: 00:49:00, Rating: 9.4"
+				+ "ID: 1, Title: Planet Earth II, Length: 04:58:00, Rating: 9.4"
+				+ "ID: 4, Title: Band of Brothers, Length: 09:54:00, Rating: 9.4";
 		
 		PrintStream originalOut = System.out;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -201,7 +201,7 @@ class TVShowDAOClassTest {
 
 	@Test
 	void testViewNotCompleted() {
-		String expectedOutput = "Title: Breaking Bad, ID: 2, Length: 00:49:00, Rating: 9.4";
+		String expectedOutput = "ID: 2, Title: Breaking Bad, Length: 00:49:00, Rating: 9.4";
 		
 		PrintStream originalOut = System.out;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -221,7 +221,7 @@ class TVShowDAOClassTest {
 
 	@Test
 	void testViewInProgress() {
-		String expectedOutput = "Title: Band of Brothers, ID: 4, Length: 09:54:00, Rating: 9.4";
+		String expectedOutput = "ID: 4, Title: Band of Brothers, Length: 09:54:00, Rating: 9.4";
 		
 		PrintStream originalOut = System.out;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -241,7 +241,7 @@ class TVShowDAOClassTest {
 
 	@Test
 	void testViewCompleted() {
-		String expectedOutput = "Title: Planet Earth II, ID: 1, Length: 04:58:00, Rating: 9.4";
+		String expectedOutput = "ID: 1, Title: Planet Earth II, Length: 04:58:00, Rating: 9.4";
 		
 		PrintStream originalOut = System.out;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
