@@ -168,9 +168,9 @@ public class TrackerDriver {
 		if (count == 0) {
 			System.out.println("No shows completed.");
 		} else if (count == 1) {
-			System.out.println(count + " show in progress.");
+			System.out.println(count + " show has been completed.");
 		} else {
-			System.out.println(count + " show(s) have been completed.");
+			System.out.println(count + " shows have been completed.");
 		}
 	}
 
@@ -329,9 +329,14 @@ public class TrackerDriver {
 		System.out.println("======================\n");
 
 		while (true) {
-			System.out.println("\nChoose an id from the available TV Shows:\n");
+			System.out.println("\nChoose an id from your shows to update:\n");
 
-			viewAllShows();
+			System.out.println("Not completed shows:");
+			showDAO.ViewNotCompleted();
+			System.out.println("In-Progress shows:");
+			showDAO.ViewInProgress();
+			System.out.println("Completed shows:");
+			showDAO.ViewCompleted();
 
 			try {
 

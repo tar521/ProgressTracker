@@ -33,9 +33,9 @@ public class TVShowDAOClass implements TVShowDAO {
 			
 			
 			while(rs.next()) {
-				int id = rs.getInt("TVShow_id");
+				int id = rs.getInt("id");
 				String title = rs.getString("title");
-				Time length = rs.getTime("length");
+				String length = rs.getString("length");
 				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				tvS.toString();
@@ -60,7 +60,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
-				Time length = rs.getTime("length");
+				String length = rs.getString("length");
 				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				tvSList.add(tvS);
@@ -88,7 +88,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
-				Time length = rs.getTime("length");
+				String length = rs.getString("length");
 				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				return tvS;
@@ -114,7 +114,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
-				Time length = rs.getTime("length");
+				String length = rs.getString("length");
 				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				return tvS;
@@ -130,7 +130,8 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public boolean addShow(TVShow TVshow) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user_shows(user_id,show_id,status) VALUES (?, ?, NC)");
+
+			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user_shows(user_id,show_id,status) VALUES (?, ?, 'NC')");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
@@ -170,7 +171,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public boolean addNotCompleted(TVShow TVshow) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET status = NC WHERE user_id = ? AND show_id = ?");
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET status = 'NC' WHERE user_id = ? AND show_id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
@@ -188,7 +189,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public boolean addInProgress(TVShow TVshow){
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = IP WHERE user_id = ? AND show_id = ?");
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = 'IP' WHERE user_id = ? AND show_id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
@@ -206,7 +207,7 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public boolean addCompleted(TVShow TVshow){
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = C WHERE user_id = ? AND show_id = ?");
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE user_shows SET Status = 'C' WHERE user_id = ? AND show_id = ?");
 			pstmt.setInt(1,user.getId());
 			pstmt.setInt(2,TVshow.getId());
 			
@@ -224,7 +225,8 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public int ViewNotCompleted() {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND status = NC");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows JOIN shows s ON (show_id = s.id) "
+					+ "WHERE user_id = ? AND status = 'NC'");
 			pstmt.setInt(1,user.getId());
 			
 			
@@ -233,7 +235,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
-				Time length = rs.getTime("length");
+				String length = rs.getString("length");
 				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				System.out.println(tvS.toString());
@@ -243,7 +245,7 @@ public class TVShowDAOClass implements TVShowDAO {
 
 		} catch(SQLException e){  
 			System.out.println("Failed to view Not Complete TV Show List of User:" + user.getId());
-			
+			e.printStackTrace();
 		}
 		return -1;	
 	}
@@ -251,7 +253,8 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public int ViewInProgress() {
 		try{ 
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND status = IP");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows JOIN shows s ON (show_id = s.id) "
+					+ "WHERE user_id = ? AND status = 'IP'");
 			pstmt.setInt(1,user.getId());
 			
 			
@@ -260,7 +263,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
-				Time length = rs.getTime("length");
+				String length = rs.getString("length");
 				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				System.out.println(tvS.toString());
@@ -278,7 +281,8 @@ public class TVShowDAOClass implements TVShowDAO {
 	@Override
 	public int ViewCompleted() {
 		try{ 
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows WHERE user_id = ? AND status = C");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user_shows JOIN shows s ON (show_id = s.id) "
+					+ "WHERE user_id = ? AND status = 'C'");
 			pstmt.setInt(1,user.getId());
 			
 			
@@ -287,7 +291,7 @@ public class TVShowDAOClass implements TVShowDAO {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String title = rs.getString("title");
-				Time length = rs.getTime("length");
+				String length = rs.getString("length");
 				float rating = rs.getFloat("rating");
 				TVShow tvS = new TVShow(id, title, length, rating);
 				System.out.println(tvS.toString());
