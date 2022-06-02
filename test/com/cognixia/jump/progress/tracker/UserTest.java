@@ -14,6 +14,13 @@ import org.junit.jupiter.api.Test;
 class UserTest {
 
 
+	/**
+	 * Validity of the connection to database with default login credentials
+	 * is tested. The default input is passed to the user prompt. If successful,
+	 * the username contained in user object should match the test parameters passed.
+	 * The success of closing the connection is also tested. Implied that getUsername()
+	 * also works correctly.
+	 */
 	@Test
 	void testLogin() {
 		InputStream stdin = System.in;
@@ -31,15 +38,13 @@ class UserTest {
 			
 			assertTrue(user.getUsername().equals("default"), "Login successfull");
 			user.exit();
+			assertTrue(user.getConn().isClosed(), "Connection successfully closed");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-		
-		
+
 		System.setIn(stdin);
 		System.setOut(originalOut);
 	}
-
 }

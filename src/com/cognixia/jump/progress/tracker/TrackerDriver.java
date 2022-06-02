@@ -51,7 +51,7 @@ public class TrackerDriver {
 		System.out.println("Welcome to your TV Show Tracker!");
 
 		while (true) {
-			System.out.println("Please choose an option below:\n");
+			System.out.println("\nPlease choose an option below:\n");
 
 			System.out.println(" 1) View TV Show Tracker");
 			System.out.println(" 2) Select TV Show to add to list");
@@ -240,7 +240,6 @@ public class TrackerDriver {
 			}
 
 			if (!repeatAction("add")) {
-				System.out.println("Returning to main menu...");
 				return;
 			}
 		}
@@ -330,7 +329,7 @@ public class TrackerDriver {
 		System.out.println("======================\n");
 
 		while (true) {
-			System.out.println("\nChoose an id from your shows to update:\n");
+			System.out.println("\nChoose an id from your shows to remove:\n");
 
 			System.out.println("Not completed shows:");
 			showDAO.ViewNotCompleted();
@@ -370,7 +369,6 @@ public class TrackerDriver {
 			}
 
 			if (!repeatAction("remove")) {
-				System.out.println("Returning to main menu...");
 				return;
 			}
 		}
