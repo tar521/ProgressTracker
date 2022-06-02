@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import com.cognixia.jump.dao.TVShowDAO;
 import com.cognixia.jump.dao.TVShowDAOClass;
+import com.cognixia.jump.exceptions.ShowAlreadyTrackedException;
 import com.cognixia.jump.exceptions.ShowNotFoundException;
 import com.cognixia.jump.exceptions.ShowNotTrackedException;
 import com.cognixia.jump.dao.TVShow;
@@ -50,7 +51,7 @@ public class TrackerDriver {
 		System.out.println("Welcome to your TV Show Tracker!");
 
 		while (true) {
-			System.out.println("Please choose an option below:\n");
+			System.out.println("\nPlease choose an option below:\n");
 
 			System.out.println(" 1) View TV Show Tracker");
 			System.out.println(" 2) Select TV Show to add to list");
@@ -103,7 +104,7 @@ public class TrackerDriver {
 		System.out.println("=======================================");
 		while (true) {
 			System.out.println("\nChoose a view option of the TV Shows:\n");
-			System.out.println(" 1) View all available TV Shows");
+			System.out.println(" 1) View all your tracked TV Shows");
 			System.out.println(" 2) View your shows that are not completed");
 			System.out.println(" 3) View your shows that are in-progress");
 			System.out.println(" 4) View your shows that you've completed");
@@ -153,7 +154,7 @@ public class TrackerDriver {
 		List<TVShow> showList = showDAO.getAllUserShows();
 
 		if (showList.isEmpty()) {
-			System.out.println("There are no shows in the system.");
+			System.out.println("There are no shows in your tracker.");
 			return;
 		}
 		for (TVShow show : showList) {
@@ -168,9 +169,9 @@ public class TrackerDriver {
 		if (count == 0) {
 			System.out.println("No shows completed.");
 		} else if (count == 1) {
-			System.out.println(count + " show in progress.");
+			System.out.println(count + " show has been completed.");
 		} else {
-			System.out.println(count + " show(s) have been completed.");
+			System.out.println(count + " shows have been completed.");
 		}
 	}
 
@@ -223,7 +224,7 @@ public class TrackerDriver {
 				System.out.println("Adding \"" + temp.getTitle() + "\" to your tracker.");
 				if (!showDAO.addShow(temp)) {
 					System.out.println("Show Not Added");
-					throw new ShowNotTrackedException(option);
+					throw new ShowAlreadyTrackedException(option);
 				}
 
 				System.out.println("Show successfully added!");
@@ -233,13 +234,12 @@ public class TrackerDriver {
 				sc.nextLine();
 			} catch (ShowNotFoundException e) {
 				System.out.println(e.getMessage());
-			} catch (ShowNotTrackedException e) {
+			} catch (ShowAlreadyTrackedException e) {
 				System.out.println(e.getMessage());
 				return;
 			}
 
 			if (!repeatAction("add")) {
-				System.out.println("Returning to main menu...");
 				return;
 			}
 		}
@@ -265,7 +265,15 @@ public class TrackerDriver {
 				int id = sc.nextInt();
 				sc.nextLine();
 
-				TVShow temp = showDAO.getTVShowById(id);
+				List<TVShow> tempList = showDAO.getAllUserShows();
+				TVShow temp = null;
+				
+				for ( TVShow t : tempList) {
+					if (t.getId() == id) {
+						temp = t;
+						break;
+					}
+				}
 
 				if (temp == null) {
 					System.out.println("Show with id = " + id + " was not found.");
@@ -329,9 +337,14 @@ public class TrackerDriver {
 		System.out.println("======================\n");
 
 		while (true) {
-			System.out.println("\nChoose an id from the available TV Shows:\n");
+			System.out.println("\nChoose an id from your shows to remove:\n");
 
-			viewAllShows();
+			System.out.println("Not completed shows:");
+			showDAO.ViewNotCompleted();
+			System.out.println("In-Progress shows:");
+			showDAO.ViewInProgress();
+			System.out.println("Completed shows:");
+			showDAO.ViewCompleted();
 
 			try {
 
@@ -364,7 +377,6 @@ public class TrackerDriver {
 			}
 
 			if (!repeatAction("remove")) {
-				System.out.println("Returning to main menu...");
 				return;
 			}
 		}
