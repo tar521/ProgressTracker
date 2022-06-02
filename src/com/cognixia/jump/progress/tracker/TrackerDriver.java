@@ -420,7 +420,11 @@ public class TrackerDriver {
 	}
 	
 	public static void viewPercentage() {
-		
+		List<TVShow> tempList = showDAO.getAllUserShows();
+		int trackedShows = tempList.size();
+		int completedShows = showDAO.ViewCompleted();
+		double percentCompleted = ((double) completedShows / trackedShows) * 100;
+		System.out.println("You are " + percentCompleted + "% of the way through your list! Keep it up!");
 	}
 
 }
