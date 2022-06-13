@@ -28,7 +28,7 @@ Data is stored in a MYSQL relational database, which consists of 3 tables: <b>Us
 Users don't have access to this table but it can be modified in the database itself.
 <br>
 The <b>User-Shows</b> table acts as both a join table for the <b>User</b> and <b>Shows</b> tables and as the storage system for all users. This table takes in the ID from the user and the ID of the show they want to add/remove/modify and records the status as a shorthand variable. This is a sample of how the <b>User-Shows</b> table will look.
-<img src="resources/Images/user_shows_table.png">
+<img src="resources/Images/user_shows_table.png"><br>
 <sub>Note: The database exists locally so this table will look differently depending on the interaction with the program</sub>
 ## Try it out!
 Want to run the program yourself?
