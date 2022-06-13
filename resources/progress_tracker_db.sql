@@ -47,11 +47,11 @@ FOREIGN KEY (show_id)
 
 
 # Reference queries
-DROP TABLE users;
-DROP TABLE shows;
-DROP TABLE user_shows;
-TRUNCATE TABLE shows;
-TRUNCATE TABLE user_shows;
-SELECT * FROM shows;
-SELECT * FROM users;
-SELECT * FROM user_shows;
+-- DROP TABLE users;
+-- DROP TABLE shows;
+-- DROP TABLE user_shows;
+-- TRUNCATE TABLE shows;
+-- TRUNCATE TABLE user_shows;
+-- SELECT * FROM shows;
+-- SELECT * FROM users;
+-- SELECT * FROM user_shows;
